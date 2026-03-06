@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="google-site-verification" content="vpIS4AMFZjl61vwjnsuaFHgQU1PLEHsVEFNRPxsPsJs" />
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MorseWave — Learn Morse Code</title>
@@ -976,6 +976,214 @@ input:checked + .toggle-slider:before { transform: translateX(22px); background:
   .header-stats { order: -1; align-self: flex-end; }
 }
 
+/* =============================================
+   FREEMIUM MODAL
+   ============================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+.modal-overlay.hidden { display: none; }
+.modal-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.modal-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
+}
+.modal-icon { font-size: 3rem; margin-bottom: 16px; }
+.modal-title {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.modal-desc {
+  color: var(--text2);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.modal-price {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(251,191,36,0.4);
+}
+.modal-price-sub {
+  font-size: 0.82rem;
+  color: var(--text3);
+  margin-bottom: 24px;
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+}
+.modal-features {
+  text-align: left;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 24px;
+}
+.modal-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 0.88rem;
+  color: var(--text2);
+  border-bottom: 1px solid var(--border);
+}
+.modal-feature:last-child { border-bottom: none; }
+.modal-feature .chk { color: var(--gold); font-size: 0.9rem; }
+.btn-unlock {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  border: none;
+  border-radius: var(--radius);
+  color: #000;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 20px rgba(251,191,36,0.3);
+}
+.btn-unlock:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(251,191,36,0.5); }
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 8px;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.modal-close-btn:hover { color: var(--text2); }
+
+/* Unlock input */
+.unlock-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.unlock-code-input {
+  flex: 1;
+  padding: 12px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.unlock-code-input:focus { border-color: var(--gold); }
+.btn-redeem {
+  padding: 12px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text2);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-redeem:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Premium badge on locked groups */
+.lock-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* Share modal */
+.share-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.share-btn {
+  padding: 14px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.share-btn .share-icon { font-size: 1.5rem; }
+
+/* Premium PRO tag in header */
+.pro-tag {
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  display: none;
+}
+.pro-tag.visible { display: inline-block; }
+
 /* Section headings */
 .section-title {
   font-family: var(--font-mono);
@@ -1041,6 +1249,55 @@ input:checked + .toggle-slider:before { transform: translateX(22px); background:
 <div class="bg-glow2"></div>
 <div id="toast-container"></div>
 
+<!-- ========== FREEMIUM MODAL ========== -->
+<div class="modal-overlay hidden" id="premium-modal">
+  <div class="modal-box">
+    <div class="modal-icon">🔒</div>
+    <div class="modal-title">Premium Content</div>
+    <div class="modal-desc">You've mastered the free lessons! Upgrade to access Numbers, Punctuation, the Timed Challenge, and all advanced modes.</div>
+    <div class="modal-price">$2.99</div>
+    <div class="modal-price-sub">ONE-TIME — YOURS FOREVER</div>
+    <div class="modal-features">
+      <div class="modal-feature"><span class="chk">⭐</span> Numbers 0–9 lessons</div>
+      <div class="modal-feature"><span class="chk">⭐</span> Punctuation lessons</div>
+      <div class="modal-feature"><span class="chk">⭐</span> Timed Challenge mode</div>
+      <div class="modal-feature"><span class="chk">⭐</span> All advanced practice modes</div>
+      <div class="modal-feature"><span class="chk">⭐</span> Full converter & reference</div>
+    </div>
+    <div class="unlock-input-row">
+      <input class="unlock-code-input" type="text" id="unlock-code-input" placeholder="HAVE A CODE?" maxlength="20">
+      <button class="btn-redeem" onclick="redeemCode()">Redeem</button>
+    </div>
+    <button class="btn-unlock" onclick="handleUpgrade()">⚡ Unlock Premium — $2.99</button>
+    <br>
+    <button class="modal-close-btn" onclick="closeModal('premium-modal')">Maybe later</button>
+  </div>
+</div>
+
+<!-- ========== SHARE MODAL ========== -->
+<div class="modal-overlay hidden" id="share-modal">
+  <div class="modal-box">
+    <div class="modal-icon">📡</div>
+    <div class="modal-title">Share MorseWave</div>
+    <div class="modal-desc">Know someone who'd love to learn Morse code? Share the app with them!</div>
+    <div class="share-grid">
+      <a class="share-btn" id="share-whatsapp" href="#" target="_blank" rel="noopener">
+        <span class="share-icon">💬</span>WhatsApp
+      </a>
+      <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener">
+        <span class="share-icon">🐦</span>Twitter / X
+      </a>
+      <a class="share-btn" id="share-reddit" href="#" target="_blank" rel="noopener">
+        <span class="share-icon">🤖</span>Reddit
+      </a>
+      <button class="share-btn" onclick="copyShareLink()">
+        <span class="share-icon">🔗</span>Copy Link
+      </button>
+    </div>
+    <button class="modal-close-btn" onclick="closeModal('share-modal')">Close</button>
+  </div>
+</div>
+
 <div class="app-wrapper">
   <!-- ========== HEADER ========== -->
   <header>
@@ -1056,7 +1313,9 @@ input:checked + .toggle-slider:before { transform: translateX(22px); background:
       <div class="header-stats">
         <div class="stat-chip">⚡ XP: <span class="val" id="xp-display">0</span></div>
         <div class="stat-chip streak">🔥 <span class="val" id="streak-display">0</span>d</div>
+        <span class="pro-tag" id="pro-tag">PRO ✓</span>
       </div>
+      <button class="btn-icon" onclick="openShareModal()">📡 SHARE</button>
       <button class="btn-icon" id="sound-toggle" onclick="toggleSound()">🔊 SOUND</button>
       <button class="btn-icon" id="theme-toggle" onclick="toggleTheme()">🌙 DARK</button>
     </div>
@@ -1399,13 +1658,13 @@ const MORSE = {
 // LESSON GROUPS — small clusters of related chars
 // ============================================================
 const GROUPS = [
-  { id: 'g1', name: 'A–E (Basics)', chars: ['E','T','A','I','N'], unlockXP: 0, description: 'The most common letters — start here!' },
-  { id: 'g2', name: 'M–S (Core)', chars: ['M','S','U','R','W'], unlockXP: 50, description: 'High-frequency letters for SOS and more' },
-  { id: 'g3', name: 'D–K (Mid)', chars: ['D','K','G','O','H'], unlockXP: 130, description: 'Start spelling common short words' },
-  { id: 'g4', name: 'B–V (Builder)', chars: ['B','C','F','L','P','V'], unlockXP: 250, description: 'Round out your core alphabet' },
-  { id: 'g5', name: 'J–Z (Advanced)', chars: ['J','Q','X','Y','Z'], unlockXP: 400, description: 'Rare letters to complete the alphabet' },
-  { id: 'g6', name: '0–9 (Numbers)', chars: ['0','1','2','3','4','5','6','7','8','9'], unlockXP: 550, description: 'Numbers follow a beautiful logical pattern' },
-  { id: 'g7', name: '. , ? ! (Punctuation)', chars: ['.', ',', '?', '!', '/'], unlockXP: 700, description: 'Punctuation for full messages' },
+  { id: 'g1', name: 'A–E (Basics)', chars: ['E','T','A','I','N'], unlockXP: 0, description: 'The most common letters — start here!', premium: false },
+  { id: 'g2', name: 'M–S (Core)', chars: ['M','S','U','R','W'], unlockXP: 50, description: 'High-frequency letters for SOS and more', premium: false },
+  { id: 'g3', name: 'D–K (Mid)', chars: ['D','K','G','O','H'], unlockXP: 130, description: 'Start spelling common short words', premium: false },
+  { id: 'g4', name: 'B–V (Builder)', chars: ['B','C','F','L','P','V'], unlockXP: 250, description: 'Round out your core alphabet', premium: false },
+  { id: 'g5', name: 'J–Z (Advanced)', chars: ['J','Q','X','Y','Z'], unlockXP: 400, description: 'Rare letters to complete the alphabet', premium: false },
+  { id: 'g6', name: '0–9 (Numbers)', chars: ['0','1','2','3','4','5','6','7','8','9'], unlockXP: 550, description: 'Numbers follow a beautiful logical pattern', premium: true },
+  { id: 'g7', name: '. , ? ! (Punctuation)', chars: ['.', ',', '?', '!', '/'], unlockXP: 700, description: 'Punctuation for full messages', premium: true },
 ];
 
 // ============================================================
@@ -1416,7 +1675,7 @@ let state = {
   level: 1,
   streak: 0,
   lastPlayed: null,
-  mastered: {},      // char → count of correct answers
+  mastered: {},
   activeGroup: 'g1',
   soundOn: true,
   darkMode: true,
@@ -1429,6 +1688,7 @@ let state = {
   challengeTimeLeft: 60,
   highScore: 0,
   learnedChars: [],
+  isPremium: false,
 };
 
 // Load state from localStorage
@@ -1589,18 +1849,37 @@ function renderLessons() {
   const tabsEl = document.getElementById('group-tabs');
   tabsEl.innerHTML = GROUPS.map(g => {
     const unlocked = state.xp >= g.unlockXP;
+    const premiumLocked = g.premium && !state.isPremium;
     const cls = [
       'group-tab',
       state.activeGroup === g.id ? 'active' : '',
-      !unlocked ? 'locked' : ''
+      (!unlocked || premiumLocked) ? 'locked' : ''
     ].join(' ');
-    return `<button class="${cls}" onclick="${unlocked ? `setActiveGroup('${g.id}')` : 'showToast(\"🔒 Complete more lessons to unlock!\", \"info\")'}">${g.name} ${!unlocked ? '🔒' : ''}</button>`;
+    const lockIcon = premiumLocked ? '⭐' : !unlocked ? '🔒' : '';
+    return `<button class="${cls}" onclick="${
+      premiumLocked ? `openPremiumModal()` :
+      !unlocked ? `showToast('Complete more lessons to unlock!', 'info')` :
+      `setActiveGroup('${g.id}')`
+    }">${g.name} ${lockIcon ? `<span class="lock-badge">${lockIcon} ${premiumLocked ? 'PRO' : ''}</span>` : ''}</button>`;
   }).join('');
 
   // Render current group content
   const group = GROUPS.find(g => g.id === state.activeGroup);
   const showHints = state.showHints;
   const content = document.getElementById('lesson-content');
+
+  // Block premium group content if not premium
+  if (group.premium && !state.isPremium) {
+    content.innerHTML = `
+      <div style="text-align:center;padding:60px 20px">
+        <div style="font-size:3rem;margin-bottom:16px">⭐</div>
+        <div style="font-family:var(--font-mono);font-size:1.2rem;letter-spacing:2px;color:var(--gold);margin-bottom:12px">PREMIUM CONTENT</div>
+        <div style="color:var(--text2);margin-bottom:24px;line-height:1.7">Unlock Numbers, Punctuation, and advanced content for a one-time payment of $2.99</div>
+        <button class="btn-primary" style="background:var(--gold);color:#000;font-weight:700" onclick="openPremiumModal()">⚡ Unlock for $2.99</button>
+      </div>
+    `;
+    return;
+  }
 
   content.innerHTML = `
     <div style="margin-bottom:20px">
@@ -1841,6 +2120,11 @@ function getUnlockedChars() {
 }
 
 function setPracticeMode(mode) {
+  // Gate timed challenge behind premium
+  if (mode === 'challenge' && !state.isPremium) {
+    openPremiumModal();
+    return;
+  }
   state.practiceMode = mode;
   // Highlight selected mode card
   document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
@@ -2208,6 +2492,91 @@ function checkStreak() {
 }
 
 // ============================================================
+// FREEMIUM SYSTEM
+// ============================================================
+
+// SECRET OWNER BYPASS CODE — only you know this!
+const OWNER_CODE = 'MORSEWAVE2024';
+
+// Gumroad product link — replace with your actual Gumroad link
+const GUMROAD_LINK = 'https://gumroad.com/l/morsewave';
+
+function isPremiumUser() {
+  return state.isPremium === true;
+}
+
+function openPremiumModal() {
+  document.getElementById('premium-modal').classList.remove('hidden');
+  document.getElementById('unlock-code-input').value = '';
+}
+
+function closePremiumModal() {
+  document.getElementById('premium-modal').classList.add('hidden');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
+}
+
+function handleUpgrade() {
+  // Open Gumroad payment page
+  window.open(GUMROAD_LINK, '_blank');
+  showToast('Complete payment, then enter your code to unlock!', 'info');
+}
+
+function redeemCode() {
+  const code = document.getElementById('unlock-code-input').value.trim().toUpperCase();
+  // Accept owner bypass code OR any code starting with MW- (simulated Gumroad codes)
+  if (code === OWNER_CODE || code.startsWith('MW-')) {
+    unlockPremium();
+  } else {
+    showToast('Invalid code. Please check and try again.', 'info');
+    document.getElementById('unlock-code-input').style.borderColor = 'var(--red)';
+    setTimeout(() => document.getElementById('unlock-code-input').style.borderColor = '', 1500);
+  }
+}
+
+function unlockPremium() {
+  state.isPremium = true;
+  saveState();
+  document.getElementById('premium-modal').classList.add('hidden');
+  document.getElementById('pro-tag').classList.add('visible');
+  showToast('🎉 Premium unlocked! All content is now available.', 'info');
+  addXP(50);
+  renderLessons();
+}
+
+function checkPremiumStatus() {
+  if (state.isPremium) {
+    document.getElementById('pro-tag').classList.add('visible');
+  }
+}
+
+// ============================================================
+// SHARE SYSTEM
+// ============================================================
+const APP_URL = 'https://sheroo6211.github.io/MorseWave';
+const APP_MSG = 'Learn Morse Code for free with MorseWave! 📡 Interactive lessons, sounds, quizzes and more.';
+
+function openShareModal() {
+  // Build share URLs
+  document.getElementById('share-whatsapp').href =
+    `https://wa.me/?text=${encodeURIComponent(APP_MSG + ' ' + APP_URL)}`;
+  document.getElementById('share-twitter').href =
+    `https://twitter.com/intent/tweet?text=${encodeURIComponent(APP_MSG)}&url=${encodeURIComponent(APP_URL)}`;
+  document.getElementById('share-reddit').href =
+    `https://reddit.com/submit?url=${encodeURIComponent(APP_URL)}&title=${encodeURIComponent('I found this free Morse code learning app — MorseWave')}`;
+  document.getElementById('share-modal').classList.remove('hidden');
+}
+
+function copyShareLink() {
+  navigator.clipboard.writeText(APP_URL).then(() => {
+    showToast('Link copied! 🔗', 'info');
+    closeModal('share-modal');
+  });
+}
+
+// ============================================================
 // INIT
 // ============================================================
 function init() {
@@ -2245,6 +2614,7 @@ function init() {
   });
 
   showToast('Welcome to MorseWave! 📡', 'info');
+  checkPremiumStatus();
 }
 
 // SOS flag for achievement
